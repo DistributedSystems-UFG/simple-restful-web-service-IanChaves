@@ -14,3 +14,15 @@ b) check for errors, such as when trying to update information for a employee th
 c) retrieve the average salary, considering all the employees;
 
 d) update the README with documentation of the service´s API (all its endpoints and how to use them).
+
+# Documentação
+
+Endpoints
+
+a)https://const.IP_ADD:const.PORT/empdb/employee/CLIENT_ID
+
+![ExerciceA](https://github.com/DistributedSystems-UFG/simple-restful-web-service-IanChaves/assets/45765511/aeedfb7a-2b1a-40ff-9166-bb4b3a97c966)
+
+![ExerciceA 2](https://github.com/DistributedSystems-UFG/simple-restful-web-service-IanChaves/assets/45765511/096b3131-4515-49fe-ab59-abd4e782074f)
+
+
