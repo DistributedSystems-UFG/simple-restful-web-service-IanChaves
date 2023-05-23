@@ -10,16 +10,36 @@ from flask import abort
 
 app = Flask(__name__)
 
+def converter_valor_string(valor_string):
+    # Remove o símbolo de moeda
+    valor_string = valor_string.replace("R$", "")
+
+    # Remove os pontos de separação de milhares
+    valor_string = valor_string.replace(".", "")
+
+    # Substitui a vírgula decimal pelo ponto decimal
+    valor_string = valor_string.replace(",", ".")
+
+    # Converte a string em um float
+    valor_float = float(valor_string)
+
+    # Converte o float para inteiro
+    valor_inteiro = int(valor_float)
+
+    return valor_inteiro
+
 empDB=[
  {
  'id':'101',
  'name':'Saravanan S',
- 'title':'Technical Leader'
+ 'title':'Technical Leader',
+ 'salary': 'R$ 5.000,00'
  },
  {
  'id':'201',
  'name':'Rajkumar P',
- 'title':'Sr Software Engineer'
+ 'title':'Sr Software Engineer',
+ 'salary': 'R$ 5.000,00'
  }
  ]
 
@@ -45,6 +65,9 @@ def updateEmp(empId):
         if 'title' in request.json:
             em[0]['title'] = request.json['title']
 
+        if 'salary' in request.json :
+            em[0]['salary'] = request.json['salary']
+
     return jsonify(em)
 
 
@@ -54,7 +77,8 @@ def createEmp():
     dat = {
     'id':request.json['id'],
     'name':request.json['name'],
-    'title':request.json['title']
+    'title':request.json['title'],
+    'salary': request.json['salary']
     }
     empDB.append(dat)
     return jsonify(dat)
@@ -68,6 +92,19 @@ def deleteEmp(empId):
         return jsonify({'response':'Success'})
     else:
         return jsonify({'response':'Failure'})
+
+
+@app.route('/empdb/employee/soma',methods=['SOMA'])
+def createEmp():
+
+    js = jsonify({'emps':empDB})
+    salario = 0
+    contador = 0
+    for a in js:
+        contador = contador + 1
+        salario = salaraio + converter_valor_string(a['salary'])
+    return salario/contador
+
 
 if __name__ == '__main__':
  app.run(host='0.0.0.0', port=5000)
